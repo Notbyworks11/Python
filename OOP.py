@@ -1,4 +1,5 @@
 class Animal():
+    species = "Mammal"
     def __init__(self, name,sound):
         self.name = name
         self.sound = sound 
@@ -9,4 +10,4 @@ class Animal():
 #instantiation (a new instance  is located at a different memory address)
 Animal1 = Animal("Dog" , "Woof")
 
-print(Animal1.speak())
+print(Animal1.species)

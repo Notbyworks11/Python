@@ -9,5 +9,7 @@ class Animal():
     
 #instantiation (a new instance  is located at a different memory address)
 Animal1 = Animal("Dog" , "Woof")
+Animal1.name = "Cat"
+Animal1.sound = "Meow"
 
-print(Animal1.species)
+print(Animal1.speak())

@@ -1,15 +1,25 @@
-class Point:
-    def __init__(self, x ,y ):
-        self._x = x
-        self._y = y
+class Circle:
+    def __init__(self,radius):
+        self.radius = radius
+        
         
     @property
-    def x(self):
-        return self._x
-
+    def radius(self):
+        return self.radius
+    
+    
+    @radius.setter
+    def radius (self, value):
+        self.radius = float(value)
+        
     @property
-    def y(self):
-        return self._y
-p1= Point(4,5)
-p1._x=6
-print(p1.x)
+    def diameter(self):
+        return self.radius * 2
+    
+    @diameter.setter
+    def diameter(self, value):
+        self.radius = value/2
+        
+        
+    
+        

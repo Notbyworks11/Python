@@ -1,9 +1,9 @@
 import logging
 
 class Account:
-    def __init__(self,owner,amount):
+    def __init__(self,owner,balance):
         self.owner = owner
-        self.amount = amount
+        self._balance = balance
         
     @property
     def owner(self):
@@ -20,31 +20,27 @@ class Account:
         
     
     @property
-    def amount(self):
-        return self._amount
+    def balance(self):
+        return self._balance
     
-    @amount.setter
-    def amount(self, value):
+
+        
+    def deposit(self,value):
         if  isinstance(value, str):
             value = value.strip()
             if not value:
-                raise ValueError('amount cannot be empty')
+                raise ValueError('balance cannot be empty')
                 
             try :
                 value = float(value)
             except ValueError:
-                raise TypeError('value must be an integer')
+                raise TypeError('value must be an float')
             
         if isinstance(value,bool) or not isinstance(value,(int,float)):
-            raise ValueError('amount must be an integer')
+            raise ValueError('balance must be an float')
         
             
         if value <= 0 :
-            raise ValueError('amount must be greater than zero')
+            raise ValueError('balance must be greater than zero')
             
-        self._amount = float(value)
-        
-
-p = Account("Andy",70)
-
-print(p.amount)
+        self._balance += float(value)

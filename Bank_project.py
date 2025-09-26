@@ -3,7 +3,7 @@ import logging
 class Account:
     def __init__(self,owner,balance):
         self.owner = owner
-        self._balance = balance
+        self._balance = self.validate(balance)
         
     @property
     def owner(self):
@@ -23,24 +23,46 @@ class Account:
     def balance(self):
         return self._balance
     
-
-        
-    def deposit(self,value):
+    def validate(self,value):
         if  isinstance(value, str):
             value = value.strip()
             if not value:
-                raise ValueError('balance cannot be empty')
+                raise ValueError('value cannot be empty')
                 
             try :
                 value = float(value)
             except ValueError:
-                raise TypeError('value must be an float')
+                raise ValueError('value must be a float')
             
         if isinstance(value,bool) or not isinstance(value,(int,float)):
-            raise ValueError('balance must be an float')
+            raise TypeError('value must be a float')
+        
+        
+        return float(value)
+        
+    def deposit(self,value):
+        
+        amount=self.validate(value)    
+        if  amount<= 0 :
+            raise ValueError('value must be greater than zero')
+        self._balance += amount
+        
+    def withdraw(self,value):
+        amount=self.validate(value)
         
             
-        if value <= 0 :
-            raise ValueError('balance must be greater than zero')
-            
-        self._balance += float(value)
+        if amount > self._balance :
+            raise ValueError('Amount cannot be more than balance \n Contact bank to include an overdraft')
+           
+        
+        self._balance -= amount
+        
+        
+        
+        
+        
+A=Account("Andy",90)
+print(A.balance)
+A.deposit(30)
+A.withdraw(10)
+print(A.balance)

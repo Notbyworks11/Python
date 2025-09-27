@@ -1,9 +1,13 @@
 import logging
 
 class Account:
-    def __init__(self,owner,balance):
+    def __init__(self,owner,balance=0):
         self.owner = owner
-        self._balance = self.validate(balance)
+        hold_balance =self.validate(balance)
+        if hold_balance >=0:
+            self._balance = hold_balance
+        else:
+            raise AttributeError('value must be > 0')
         
     @property
     def owner(self):
@@ -32,10 +36,10 @@ class Account:
             try :
                 value = float(value)
             except ValueError:
-                raise ValueError('value must be a float')
+                raise ValueError('value must be a number')
             
         if isinstance(value,bool) or not isinstance(value,(int,float)):
-            raise TypeError('value must be a float')
+            raise TypeError('value must be a number')
         
         
         return float(value)
@@ -49,20 +53,13 @@ class Account:
         
     def withdraw(self,value):
         amount=self.validate(value)
-        
+        if amount <= 0:
+            raise ValueError('value cannot be negative')
             
         if amount > self._balance :
             raise ValueError('Amount cannot be more than balance \n Contact bank to include an overdraft')
            
         
         self._balance -= amount
-        
-        
-        
-        
-        
-A=Account("Andy",90)
-print(A.balance)
-A.deposit(30)
-A.withdraw(10)
-print(A.balance)
+#class Savings(Account):
+ #   def __init__(self,name,)

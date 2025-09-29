@@ -23,4 +23,4 @@ dog_data = {
 }
 
 with open('dog_data.json', 'w', encoding = "utf-8") as write_file:
-    json.dump(dog_data, write_file)
+    print(json.dumps(dog_data, indent=4))
